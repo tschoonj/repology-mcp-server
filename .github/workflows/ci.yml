@@ -46,7 +46,7 @@ jobs:
         REPOLOGY_RATE_LIMIT_DELAY: "1.0"
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v5
       with:
         file: ./coverage.xml
         flags: unittests
