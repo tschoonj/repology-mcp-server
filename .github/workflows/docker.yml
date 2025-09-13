@@ -18,6 +18,7 @@ jobs:
       contents: read
       packages: write
       id-token: write  # Required for artifact attestation
+      attestations: write  # Required for creating attestations
 
     steps:
     - name: Checkout repository
