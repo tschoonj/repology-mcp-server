@@ -1,8 +1,9 @@
 # Repology MCP Server
 
-[![CI](https://github.com/tschoonj/repology-mcp-server/workflows/CI/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/ci.yml)
-[![Docker](https://github.com/tschoonj/repology-mcp-server/workflows/Docker/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/docker.yml)
+[![CI](https://github.com/tschoonj/repology-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/ci.yml)
+[![Docker](https://github.com/tschoonj/repology-mcp-server/actions/workflows/docker.yml/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/docker.yml)
 [![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Frepology--mcp--server-blue)](https://github.com/tschoonj/repology-mcp-server/pkgs/container/repology-mcp-server)
+[![PyPI](https://img.shields.io/pypi/v/repology-mcp-server)](https://pypi.org/project/repology-mcp-server/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A Model Context Protocol (MCP) server that provides access to the [Repology](https://repology.org) package repository data through a standardized interface.
