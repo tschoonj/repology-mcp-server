@@ -59,6 +59,9 @@ include = [
 testpaths = ["tests"]
 asyncio_mode = "auto"
 addopts = "-v --cov=repology_mcp --cov-report=term-missing"
+markers = [
+    "integration: marks tests as integration tests that contact real services (deselect with '-m \"not integration\"')"
+]
 
 [tool.black]
 line-length = 88
