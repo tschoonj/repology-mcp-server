@@ -1,0 +1,56 @@
+"""Test configuration and fixtures."""
+
+import pytest
+import pytest_asyncio
+from typing import Dict, Any, List
+
+from repology_mcp.client import RepologyClient
+from repology_mcp.models import Package, Problem
+
+
+@pytest_asyncio.fixture
+async def repology_client():
+    """Create a RepologyClient for testing."""
+    client = RepologyClient(rate_limit_delay=0.0)  # Disable rate limiting for tests
+    yield client
+    await client.close()
+
+
+# Sample test data
+SAMPLE_PACKAGE = {
+    "repo": "freebsd",
+    "srcname": "www/firefox",
+    "binname": "firefox",
+    "visiblename": "www/firefox",
+    "version": "50.1.0",
+    "origversion": "50.1.0_4,1",
+    "status": "newest",
+    "summary": "Widely used web browser",
+    "categories": ["www"],
+    "licenses": ["GPLv2+"],
+    "maintainers": ["gecko@FreeBSD.org"]
+}
+
+SAMPLE_PROBLEM = {
+    "type": "homepage_dead",
+    "data": {
+        "url": "http://example.com",
+        "code": 500
+    },
+    "project_name": "test-project",
+    "version": "1.0",
+    "binname": "test-bin",
+    "srcname": "test/test-src",
+    "rawversion": "1.0_1"
+}
+
+SAMPLE_PROJECT_PACKAGES = {
+    "firefox": [SAMPLE_PACKAGE],
+    "chromium": [{
+        "repo": "debian",
+        "visiblename": "chromium",
+        "version": "91.0.4472.114",
+        "status": "outdated",
+        "summary": "Chromium web browser"
+    }]
+}
