@@ -1,5 +1,10 @@
 # Repology MCP Server
 
+[![CI](https://github.com/tschoonj/repology-mcp-server/workflows/CI/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/ci.yml)
+[![Docker](https://github.com/tschoonj/repology-mcp-server/workflows/Docker/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/docker.yml)
+[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Frepology--mcp--server-blue)](https://github.com/tschoonj/repology-mcp-server/pkgs/container/repology-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A Model Context Protocol (MCP) server that provides access to the [Repology](https://repology.org) package repository data through a standardized interface.
 
 ## Features
@@ -57,17 +62,42 @@ Add to your Claude Desktop configuration:
 }
 ```
 
-### With Docker for Claude Desktop
-
-If you prefer using Docker:
+Or using the pre-built Docker image:
 
 ```json
 {
   "mcpServers": {
     "repology": {
-      "command": "./docker-run.sh",
-      "args": ["stdio"],
-      "cwd": "/path/to/repology-mcp-server"
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "ghcr.io/tschoonj/repology-mcp-server:latest"]
+    }
+  }
+}
+```
+
+### With VS Code
+
+Add to your VS Code settings (`.vscode/settings.json` or user settings):
+
+```json
+{
+  "mcp.servers": {
+    "repology": {
+      "command": "uv",
+      "args": ["run", "repology-mcp-server"]
+    }
+  }
+}
+```
+
+Or using the pre-built Docker image:
+
+```json
+{
+  "mcp.servers": {
+    "repology": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "ghcr.io/tschoonj/repology-mcp-server:latest"]
     }
   }
 }
@@ -82,22 +112,34 @@ uv run mcp dev src/repology_mcp/server.py
 
 ### Using Docker
 
-```bash
-# Build the Docker image
-./docker-run.sh build
+#### Pre-built images from GitHub Container Registry
 
-# Run with stdio transport (for MCP clients like Claude Desktop)
-./docker-run.sh stdio
+```bash
+# Pull the latest image
+docker pull ghcr.io/tschoonj/repology-mcp-server:latest
+
+# Run with stdio transport
+docker run -i --rm ghcr.io/tschoonj/repology-mcp-server:latest
 
 # Run with HTTP transport on port 8000
-./docker-run.sh http
+docker run --rm -p 8000:8000 ghcr.io/tschoonj/repology-mcp-server:latest --transport http --port 8000
 
-# Run with SSE transport on port 8001  
-./docker-run.sh sse
+# Use a specific version
+docker pull ghcr.io/tschoonj/repology-mcp-server:1.0.0
+docker run -i --rm ghcr.io/tschoonj/repology-mcp-server:1.0.0
+```
 
-# Using docker-compose
-docker-compose up repology-mcp-http    # HTTP transport
-docker-compose up repology-mcp-sse     # SSE transport (with profile)
+#### Local development with Docker
+
+```bash
+# Build the Docker image locally
+docker build -t repology-mcp-server .
+
+# Run with stdio transport
+docker run -i --rm repology-mcp-server
+
+# Run with HTTP transport on port 8000
+docker run --rm -p 8000:8000 repology-mcp-server --transport http --port 8000
 ```
 
 ## Development
