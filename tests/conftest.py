@@ -54,3 +54,32 @@ SAMPLE_PROJECT_PACKAGES = {
         "summary": "Chromium web browser"
     }]
 }
+
+# Additional test data for filtering tests
+DEBIAN_PACKAGE = {
+    "repo": "debian",
+    "srcname": "firefox",
+    "binname": "firefox",
+    "visiblename": "firefox",
+    "version": "91.0",
+    "origversion": "91.0-1",
+    "status": "outdated",
+    "summary": "Widely used web browser",
+    "categories": ["www"],
+    "licenses": ["GPLv2+"],
+    "maintainers": ["debian-mozilla@lists.debian.org"]
+}
+
+UBUNTU_PACKAGE = {
+    "repo": "ubuntu",
+    "srcname": "firefox",
+    "binname": "firefox",
+    "visiblename": "firefox",
+    "version": "92.0",
+    "origversion": "92.0-1ubuntu1",
+    "status": "newest",
+    "summary": "Widely used web browser",
+    "categories": ["www"],
+    "licenses": ["GPLv2+"],
+    "maintainers": ["ubuntu-mozilla@lists.ubuntu.com"]
+}

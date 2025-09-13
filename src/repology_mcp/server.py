@@ -49,6 +49,21 @@ def _problems_to_json(problems: List[Problem]) -> str:
     return json.dumps([prob.model_dump() for prob in problems], indent=2)
 
 
+def _filter_packages_by_repo(packages: List[Package], repo: str) -> List[Package]:
+    """Filter packages to only include those from a specific repository."""
+    return [pkg for pkg in packages if pkg.repo == repo]
+
+
+def _filter_project_packages_by_repo(project_packages: Dict[str, List[Package]], repo: str) -> Dict[str, List[Package]]:
+    """Filter project packages to only include those from a specific repository."""
+    filtered = {}
+    for project_name, packages in project_packages.items():
+        filtered_packages = _filter_packages_by_repo(packages, repo)
+        if filtered_packages:  # Only include projects that have packages in the specified repo
+            filtered[project_name] = filtered_packages
+    return filtered
+
+
 def _project_packages_to_json(project_packages: Dict[str, List[Package]]) -> str:
     """Convert project packages dict to formatted JSON string."""
     result = {}
@@ -103,6 +118,10 @@ async def search_projects(
             **filters
         )
         
+        # Apply client-side repository filtering if inrepo is specified
+        if inrepo and project_packages:
+            project_packages = _filter_project_packages_by_repo(project_packages, inrepo)
+        
         if not project_packages:
             return json.dumps({"message": f"No projects found matching '{query}'"})
         
@@ -119,12 +138,14 @@ async def search_projects(
 @mcp.tool()
 async def get_project(
     project_name: str,
+    repository: Optional[str] = None,
     ctx: Context[ServerSession, AppContext] = None
 ) -> str:
     """Get detailed information about a specific project.
     
     Args:
         project_name: Exact name of the project to retrieve
+        repository: Optional repository filter to show only packages from that repository
     
     Returns:
         JSON formatted list of packages for the project
@@ -135,6 +156,12 @@ async def get_project(
         
         if not packages:
             return json.dumps({"message": f"No packages found for project '{project_name}'"})
+        
+        # Apply client-side repository filtering if repository is specified
+        if repository:
+            packages = _filter_packages_by_repo(packages, repository)
+            if not packages:
+                return json.dumps({"message": f"No packages found for project '{project_name}' in repository '{repository}'"})
         
         return _packages_to_json(packages)
         
@@ -213,6 +240,10 @@ async def list_projects(
             limit=limit,
             **filters
         )
+        
+        # Apply client-side repository filtering if inrepo is specified
+        if inrepo and project_packages:
+            project_packages = _filter_project_packages_by_repo(project_packages, inrepo)
         
         if not project_packages:
             return json.dumps({"message": "No projects found matching the criteria"})
