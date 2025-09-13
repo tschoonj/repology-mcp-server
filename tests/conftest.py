@@ -1,11 +1,8 @@
 """Test configuration and fixtures."""
 
-import pytest
 import pytest_asyncio
-from typing import Dict, Any, List
 
 from repology_mcp.client import RepologyClient
-from repology_mcp.models import Package, Problem
 
 
 @pytest_asyncio.fixture
@@ -28,31 +25,30 @@ SAMPLE_PACKAGE = {
     "summary": "Widely used web browser",
     "categories": ["www"],
     "licenses": ["GPLv2+"],
-    "maintainers": ["gecko@FreeBSD.org"]
+    "maintainers": ["gecko@FreeBSD.org"],
 }
 
 SAMPLE_PROBLEM = {
     "type": "homepage_dead",
-    "data": {
-        "url": "http://example.com",
-        "code": 500
-    },
+    "data": {"url": "http://example.com", "code": 500},
     "project_name": "test-project",
     "version": "1.0",
     "binname": "test-bin",
     "srcname": "test/test-src",
-    "rawversion": "1.0_1"
+    "rawversion": "1.0_1",
 }
 
 SAMPLE_PROJECT_PACKAGES = {
     "firefox": [SAMPLE_PACKAGE],
-    "chromium": [{
-        "repo": "debian",
-        "visiblename": "chromium",
-        "version": "91.0.4472.114",
-        "status": "outdated",
-        "summary": "Chromium web browser"
-    }]
+    "chromium": [
+        {
+            "repo": "debian",
+            "visiblename": "chromium",
+            "version": "91.0.4472.114",
+            "status": "outdated",
+            "summary": "Chromium web browser",
+        }
+    ],
 }
 
 # Additional test data for filtering tests
@@ -67,7 +63,7 @@ DEBIAN_PACKAGE = {
     "summary": "Widely used web browser",
     "categories": ["www"],
     "licenses": ["GPLv2+"],
-    "maintainers": ["debian-mozilla@lists.debian.org"]
+    "maintainers": ["debian-mozilla@lists.debian.org"],
 }
 
 UBUNTU_PACKAGE = {
@@ -81,5 +77,5 @@ UBUNTU_PACKAGE = {
     "summary": "Widely used web browser",
     "categories": ["www"],
     "licenses": ["GPLv2+"],
-    "maintainers": ["ubuntu-mozilla@lists.ubuntu.com"]
+    "maintainers": ["ubuntu-mozilla@lists.ubuntu.com"],
 }

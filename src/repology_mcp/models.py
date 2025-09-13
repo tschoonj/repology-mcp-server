@@ -1,12 +1,12 @@
 """Pydantic models for Repology API data structures."""
 
 from typing import List, Optional, Dict, Any, Literal
-from pydantic import BaseModel, Field, AnyHttpUrl
+from pydantic import BaseModel, Field
 
 
 class Package(BaseModel):
     """A package in a repository."""
-    
+
     repo: str = Field(description="Repository name")
     subrepo: Optional[str] = Field(None, description="Subrepository name")
     srcname: Optional[str] = Field(None, description="Source package name")
@@ -16,8 +16,16 @@ class Package(BaseModel):
     version: str = Field(description="Package version (sanitized)")
     origversion: Optional[str] = Field(None, description="Original package version")
     status: Literal[
-        "newest", "devel", "unique", "outdated", "legacy", 
-        "rolling", "noscheme", "incorrect", "untrusted", "ignored"
+        "newest",
+        "devel",
+        "unique",
+        "outdated",
+        "legacy",
+        "rolling",
+        "noscheme",
+        "incorrect",
+        "untrusted",
+        "ignored",
     ] = Field(description="Package status")
     summary: Optional[str] = Field(None, description="Package description")
     categories: Optional[List[str]] = Field(None, description="Package categories")
@@ -27,7 +35,7 @@ class Package(BaseModel):
 
 class Problem(BaseModel):
     """A problem reported for a package."""
-    
+
     type: str = Field(description="Problem type")
     data: Dict[str, Any] = Field(description="Additional problem details")
     project_name: str = Field(description="Repology project name")
@@ -39,13 +47,17 @@ class Problem(BaseModel):
 
 class ProjectSummary(BaseModel):
     """Summary information about a project."""
-    
+
     name: str = Field(description="Project name")
     newest_version: Optional[str] = Field(None, description="Newest version")
     outdated_repos: int = Field(0, description="Number of outdated repositories")
     total_repos: int = Field(0, description="Total number of repositories")
-    categories: List[str] = Field(default_factory=list, description="Project categories")
-    maintainers: List[str] = Field(default_factory=list, description="Project maintainers")
+    categories: List[str] = Field(
+        default_factory=list, description="Project categories"
+    )
+    maintainers: List[str] = Field(
+        default_factory=list, description="Project maintainers"
+    )
 
 
 # Type aliases for API responses
