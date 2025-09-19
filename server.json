@@ -1,0 +1,31 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.tschoonj/repology-mcp-server",
+  "description": "MCP server that provides access to Repology package repository data",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/tschoonj/repology-mcp-server",
+    "source": "github"
+  },
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registry_type": "pypi",
+      "registry_base_url": "https://pypi.org",
+      "identifier": "repology-mcp-server",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      }
+    },
+    {
+      "registry_type": "oci",
+      "registry_base_url": "https://ghcr.io",
+      "identifier": "tschoonj/repology-mcp-server",
+      "version": "0.1.1",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

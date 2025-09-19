@@ -75,3 +75,6 @@ Thumbs.db
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+.mcpregistry_github_token
+.mcpregistry_registry_token
