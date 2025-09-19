@@ -3,6 +3,7 @@
 import asyncio
 from typing import Dict, List, Optional, Any, Union
 from urllib.parse import urlencode, quote
+from importlib.metadata import version
 
 import httpx
 from pydantic import ValidationError
@@ -32,7 +33,6 @@ class RepologyClient:
     """Async HTTP client for Repology API."""
 
     BASE_URL = "https://repology.org/api/v1"
-    USER_AGENT = "repology-mcp-server/0.1.0 (https://github.com/modelcontextprotocol/repology-mcp-server)"
 
     def __init__(
         self,
@@ -52,10 +52,18 @@ class RepologyClient:
         self.max_retries = max_retries
         self._last_request_time = 0.0
 
+        # Get package version dynamically
+        try:
+            pkg_version = version("repology-mcp-server")
+        except Exception:
+            pkg_version = "unknown"
+
+        user_agent = f"repology-mcp-server/{pkg_version} (https://github.com/tschoonj/repology-mcp-server)"
+
         # Create HTTP client with proper headers
         self._client = httpx.AsyncClient(
             timeout=httpx.Timeout(timeout),
-            headers={"User-Agent": self.USER_AGENT},
+            headers={"User-Agent": user_agent},
             follow_redirects=True,
         )
 
