@@ -1,5 +1,7 @@
 # Repology MCP Server
 
+<!-- mcp-name: io.github.tschoonj/repology-mcp-server -->
+
 [![CI](https://github.com/tschoonj/repology-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/ci.yml)
 [![Docker](https://github.com/tschoonj/repology-mcp-server/actions/workflows/docker.yml/badge.svg)](https://github.com/tschoonj/repology-mcp-server/actions/workflows/docker.yml)
 [![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Ftschoonj%2Frepology--mcp--server-blue)](https://github.com/tschoonj/repology-mcp-server/pkgs/container/repology-mcp-server)

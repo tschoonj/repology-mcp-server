@@ -51,3 +51,4 @@ LABEL org.opencontainers.image.description="Model Context Protocol server for Re
 LABEL org.opencontainers.image.version="0.1.0"
 LABEL org.opencontainers.image.source="https://github.com/tschoonj/repology-mcp-server"
 LABEL org.opencontainers.image.licenses="MIT"
+LABEL io.modelcontextprotocol.server.name="io.github.tschoonj/repology-mcp-server"
