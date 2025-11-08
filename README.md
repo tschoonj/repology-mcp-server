@@ -10,6 +10,10 @@
 
 A Model Context Protocol (MCP) server that provides access to the [Repology](https://repology.org) package repository data through a standardized interface.
 
+<a href="https://glama.ai/mcp/servers/@tschoonj/repology-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@tschoonj/repology-mcp-server/badge" alt="Repology Server MCP server" />
+</a>
+
 ## Features
 
 This MCP server exposes the following tools:
